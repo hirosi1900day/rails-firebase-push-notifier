@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # name で名前解決できる
+  name: dbserver-service
+
+spec:
+  # クラスタ上に公開
+  type: ClusterIP
+  selector:
+    # これにマッチした pod に流す
+    app: hello-rails-on-k8s
+    server: db
+  ports:
+    - name: mysql
+      port: 3306
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbserver-deployment
+  labels:
+    app: hello-rails-on-k8s
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-rails-on-k8s
+      server: db
+  template:
+    metadata:
+      labels:
+        app: hello-rails-on-k8s
+        server: db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0.29
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: password
+          ports:
+            - containerPort: 3306

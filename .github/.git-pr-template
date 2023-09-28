@@ -1,0 +1,5 @@
+[リリース] <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
+
+<% pull_requests.each do |pr| -%>
+- <%= "##{pr.pr.number} *( __#{pr.pr.head.ref}__ by __#{pr.pr.user.login}__ )*" %>
+<% end -%>
