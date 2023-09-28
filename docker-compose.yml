@@ -12,7 +12,6 @@ services:
       - 3306:3306
   rails:
     build:
-      context: .
       dockerfile: Dockerfile
     volumes:
       - .:/myapp

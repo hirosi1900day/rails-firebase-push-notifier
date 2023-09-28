@@ -29,6 +29,6 @@ VOLUME /myapp/tmp
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-CMD /bin/bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+CMD  /bin/bash -c  "bundle install && rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
 
 
