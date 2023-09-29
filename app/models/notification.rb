@@ -14,7 +14,7 @@ class Notification
 
       request_body = {
         message: {
-          token: "[ 通知を出したい端末ID ]",
+          token: "[ 通知を出したい端末ID ]", # <= またはtopicを指定
           data: {
             data1: "データ1",
             data2: "データ2",
